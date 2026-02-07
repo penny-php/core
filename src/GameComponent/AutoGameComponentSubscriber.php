@@ -2,6 +2,8 @@
 
 namespace PennyPHP\Core\GameComponent;
 
+use PennyPHP\Core\GameComponent\Entity\GameComponent;
+
 class AutoGameComponentSubscriber implements GameComponentSubscriberInterface
 {
     private array $componentClasses = [];

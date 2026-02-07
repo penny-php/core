@@ -9,7 +9,9 @@
             "email": "gabs496@hotmail.it"
         }
     ],
-    "require": {},
+    "require": {
+        "symfony/http-kernel": "^7.1"
+    },
     "autoload": {
         "psr-4": {
             "PennyPHP\\Core\\": "src/"

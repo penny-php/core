@@ -2,7 +2,7 @@
 
 namespace PennyPHP\Core\GameObject;
 
-use PennyPHP\Core\GameComponent\GameComponent;
+use PennyPHP\Core\GameComponent\Entity\GameComponent;
 use Stringable;
 
 interface GameObjectInterface extends Stringable

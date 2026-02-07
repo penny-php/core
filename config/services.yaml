@@ -1,0 +1,17 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  PennyPHP\Core\:
+    resource: '../src/'
+    exclude:
+      - '../src/GameObject/Entity'
+      - '../src/GameObject/Event'
+      - '../src/GameObject/Exception'
+      - '../src/GameComponent/Entity'
+      - '../src/GameComponent/Exception'
+
+  _instanceof:
+    PennyPHP\Core\GameObjectPrototype\GameObjectPrototypeInterface:
+      tags: [ 'game.object.prototype' ]

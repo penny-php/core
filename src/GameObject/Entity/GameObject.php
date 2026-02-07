@@ -6,8 +6,8 @@ use App\Repository\Game\GameObjectRepository;
 use Doctrine\ORM\Mapping as ORM;
 use PennyPHP\Core\GameObject\GameObjectInterface;
 use PennyPHP\Core\GameObjectPrototype\GameObjectPrototypeInterface;
-use PennyPHP\Core\GameComponent\Exception\InvalidGameComponentException;
-use PennyPHP\Core\GameComponent\GameComponent;
+use PennyPHP\Core\GameComponent\Entity\Exception\InvalidGameComponentException;
+use PennyPHP\Core\GameComponent\Entity\GameComponent;
 use Symfony\Component\Uid\Uuid;
 
 #[ORM\Entity(repositoryClass: GameObjectRepository::class)]

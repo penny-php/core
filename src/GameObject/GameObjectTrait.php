@@ -2,8 +2,8 @@
 
 namespace PennyPHP\Core\GameObject;
 
-use PennyPHP\Core\GameComponent\Exception\InvalidGameComponentException;
-use PennyPHP\Core\GameComponent\GameComponent;
+use PennyPHP\Core\GameComponent\Entity\Exception\InvalidGameComponentException;
+use PennyPHP\Core\GameComponent\Entity\GameComponent;
 
 trait GameObjectTrait
 {
