@@ -10,8 +10,8 @@ use Doctrine\ORM\Event\PreRemoveEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Doctrine\ORM\Events;
 use Doctrine\ORM\Query\Expr\Join;
-use PennyPHP\Core\GameObject\Entity\GameObject;
-use PennyPHP\Core\GameComponent\Entity\GameComponent;
+use PennyPHP\Core\Entity\GameComponent;
+use PennyPHP\Core\Entity\GameObject;
 
 #[AsEntityListener(event: Events::postLoad, method: 'postLoadGameObject', entity: GameObject::class)]
 #[AsEntityListener(event: Events::prePersist, method: 'prePersistGameObject', entity: GameObject::class)]

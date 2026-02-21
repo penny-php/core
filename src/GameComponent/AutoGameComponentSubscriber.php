@@ -2,7 +2,7 @@
 
 namespace PennyPHP\Core\GameComponent;
 
-use PennyPHP\Core\GameComponent\Entity\GameComponent;
+use PennyPHP\Core\Entity\GameComponent;
 
 class AutoGameComponentSubscriber implements GameComponentSubscriberInterface
 {

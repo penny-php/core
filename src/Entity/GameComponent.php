@@ -1,13 +1,12 @@
 <?php
 
-namespace PennyPHP\Core\GameComponent\Entity;
+namespace PennyPHP\Core\Entity;
 
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\MappedSuperclass;
 use Doctrine\ORM\Mapping\OneToOne;
 use PennyPHP\Core\GameComponent\GameComponentInterface;
-use PennyPHP\Core\GameObject\Entity\GameObject;
 use Symfony\Component\Uid\Uuid;
 
 #[MappedSuperclass]

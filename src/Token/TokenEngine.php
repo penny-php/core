@@ -3,8 +3,8 @@
 namespace PennyPHP\Core\Token;
 
 use App\Repository\Data\PlayerCharacterRepository;
-use App\Repository\Game\GameObjectRepository;
 use PennyPHP\Core\GameObject\GameObjectInterface;
+use PennyPHP\Core\GameObject\Repository\GameObjectRepository;
 
 readonly class TokenEngine
 {

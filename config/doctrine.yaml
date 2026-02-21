@@ -1,0 +1,9 @@
+doctrine:
+  orm:
+    mappings:
+      CoreBundle:
+        type: attribute
+        is_bundle: true
+        dir: '/src/GameObject/Entity'
+        prefix: 'PennyPHP\Core\GameObject\Entity'
+        alias: PennyPHP\Core\GameObject

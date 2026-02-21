@@ -4,7 +4,7 @@ namespace PennyPHP\Core\GameObject\Doctrine\Listener;
 
 use Doctrine\Bundle\DoctrineBundle\Attribute\AsEntityListener;
 use Doctrine\ORM\Events;
-use PennyPHP\Core\GameObject\Entity\GameObject;
+use PennyPHP\Core\Entity\GameObject;
 use PennyPHP\Core\GameObject\Event\GameObjectNewEvent;
 use PennyPHP\Core\GameObject\Event\GameObjectRemoveEvent;
 use PennyPHP\Core\GameObject\Event\GameObjectUpdateEvent;

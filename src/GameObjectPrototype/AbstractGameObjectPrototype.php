@@ -2,9 +2,9 @@
 
 namespace PennyPHP\Core\GameObjectPrototype;
 
+use PennyPHP\Core\Entity\GameComponent;
+use PennyPHP\Core\Entity\GameObject;
 use PennyPHP\Core\GameComponent\Entity\Exception\InvalidGameComponentException;
-use PennyPHP\Core\GameObject\Entity\GameObject;
-use PennyPHP\Core\GameComponent\Entity\GameComponent;
 use ReflectionClass;
 use Symfony\Contracts\Cache\CacheInterface;
 

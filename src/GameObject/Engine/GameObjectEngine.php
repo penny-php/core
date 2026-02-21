@@ -2,10 +2,10 @@
 
 namespace PennyPHP\Core\GameObject\Engine;
 
-use App\Repository\Game\GameObjectRepository;
-use PennyPHP\Core\GameObject\Entity\GameObject;
+use PennyPHP\Core\Entity\GameObject;
 use PennyPHP\Core\GameObject\Exception\GameObjectNotFound;
 use PennyPHP\Core\GameObject\Exception\RegisteredANonGameObjectException;
+use PennyPHP\Core\GameObject\Repository\GameObjectRepository;
 use PennyPHP\Core\GameObjectPrototype\AbstractGameObjectPrototype;
 use PennyPHP\Core\GameObjectPrototype\GameObjectPrototypeInterface;
 use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
