@@ -66,7 +66,7 @@ class GameObject implements GameObjectInterface
     /**
      * @template T of GameComponent
      * @param class-string<T> $componentClass
-     * @return GameComponent|null
+     * @return T|null
      */
     public function getComponent(string $componentClass): ?GameComponent
     {
