@@ -1,6 +1,6 @@
 <?php
 
-namespace PennyPHP\Core\GameComponent\Exception;
+namespace PennyPHP\Core\Exception;
 
 use Exception;
 

@@ -1,9 +1,10 @@
 <?php
 
-namespace PennyPHP\Core\GameObject;
+namespace PennyPHP\Core;
 
 use PennyPHP\Core\Entity\GameComponent;
-use PennyPHP\Core\GameComponent\Entity\Exception\InvalidGameComponentException;
+use PennyPHP\Core\Exception\InvalidGameComponentException;
+use ReflectionClass;
 
 trait GameObjectTrait
 {
@@ -24,11 +25,10 @@ trait GameObjectTrait
             }
         }
 
-        /** @var GameComponent[] $components */
-        $this->components = [];
+        $components = array_merge($components, $this->getGameComponentFromAttributes());
+
         foreach ($components as $component) {
-            /** @varGameComponent $component */
-            $this->components[$component::getComponentName()] = $component;
+            $this->setComponent($component);
         }
     }
 
@@ -46,6 +46,7 @@ trait GameObjectTrait
     public function setComponent(GameComponent $component, ?string $componentId = null): self
     {
         $this->components[$componentId ?? $component::getComponentName()] = $component;
+        $component->setGameObject($this);
         return $this;
     }
 
@@ -70,7 +71,7 @@ trait GameObjectTrait
     /**
      * @template T of GameComponent
      * @param class-string<T> $componentClass
-     * @return GameComponent|null
+     * @return T|null
      */
     public function getComponent(string $componentClass): ?GameComponent
     {
@@ -90,5 +91,21 @@ trait GameObjectTrait
     public  function __toString(): string
     {
         return $this::class . '::' . $this->getId();
+    }
+
+    private function getGameComponentFromAttributes(): array
+    {
+        $components = [];
+        $reflection = new ReflectionClass($this);
+        foreach ($reflection->getAttributes() as $attribute) {
+            $name = $attribute->getName();
+            if (is_subclass_of($name, GameComponent::class)) {
+
+                /** @var GameComponent $component */
+                $component = $attribute->newInstance();
+                $components[$name::getComponentName()] = $component;
+            }
+        }
+        return $components;
     }
 }

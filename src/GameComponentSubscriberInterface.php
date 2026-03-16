@@ -1,6 +1,6 @@
 <?php
 
-namespace PennyPHP\Core\GameComponent;
+namespace PennyPHP\Core;
 
 interface GameComponentSubscriberInterface
 {

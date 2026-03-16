@@ -1,8 +1,8 @@
 <?php
 
-namespace PennyPHP\Core\GameObject\Event;
+namespace PennyPHP\Core\Event;
 
-use PennyPHP\Core\GameObject\GameObjectInterface;
+use PennyPHP\Core\GameObjectInterface;
 
 readonly class GameObjectRemoveEvent
 {

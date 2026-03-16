@@ -3,23 +3,25 @@
 namespace PennyPHP\Core\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use PennyPHP\Core\GameComponent\Exception\InvalidGameComponentException;
-use PennyPHP\Core\GameObject\GameObjectInterface;
-use PennyPHP\Core\GameObject\Repository\GameObjectRepository;
-use PennyPHP\Core\GameObjectPrototype\GameObjectPrototypeInterface;
+use PennyPHP\Core\Exception\InvalidGameComponentException;
+use PennyPHP\Core\GameObjectInterface;
+use PennyPHP\Core\GameObjectPrototypeInterface;
+use PennyPHP\Core\GameObjectTrait;
+use PennyPHP\Core\Repository\GameObjectRepository;
 use Symfony\Component\Uid\Uuid;
 
 #[ORM\Entity(repositoryClass: GameObjectRepository::class)]
 #[ORM\Table(name: "core_game_object")]
 class GameObject implements GameObjectInterface
 {
+    use GameObjectTrait {
+        GameObjectTrait::__construct as _gameObjectConstruct;
+    }
+
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'NONE')]
     #[ORM\Column(type: 'guid')]
-    private string $id;
-
-    /** @var array<string, GameComponent> */
-    protected array $components = [];
+    protected string $id;
 
     #[ORM\Column(name: 'type', type: 'string')]
     private string $prototype;
@@ -30,57 +32,16 @@ class GameObject implements GameObjectInterface
      */
     public function __construct(GameObjectPrototypeInterface|string $prototype, array $components)
     {
-        $this->id = Uuid::v7();
         if ($prototype instanceof GameObjectPrototypeInterface) {
             $prototype = $prototype->getType();
         }
         $this->prototype = $prototype;
-
-        foreach ($components as $component) {
-            if (!$component instanceof GameComponent) {
-                throw new InvalidGameComponentException(print_r($component, true) . " is not an instance of " . GameComponent::class);
-            }
-        }
-
-        foreach ($components as $component) {
-            $component->setGameObject($this);
-        }
-
-        $fastAccessComponents = [];
-        foreach ($components as $component) {
-            $fastAccessComponents[$component::class] = $component;
-        }
-        $this->components = $fastAccessComponents;
-    }
-
-    public function getId(): string
-    {
-        return $this->id;
+        self::_gameObjectConstruct(Uuid::v7(), $components);
     }
 
     public function getPrototype(): string
     {
         return $this->prototype;
-    }
-
-    /**
-     * @template T of GameComponent
-     * @param class-string<T> $componentClass
-     * @return T|null
-     */
-    public function getComponent(string $componentClass): ?GameComponent
-    {
-        if ($component = $this->components[$componentClass] ?? null) {
-            return $component;
-        }
-
-        foreach ($this->components as $component) {
-            if ($component::getComponentName() === $componentClass) {
-                return $component;
-            }
-        }
-
-        return null;
     }
 
     public function isInstanceOf(GameObject|GameObjectPrototypeInterface|string $object): bool
@@ -96,36 +57,6 @@ class GameObject implements GameObjectInterface
         return $this->getPrototype() === $type;
     }
 
-    /** @return array<string,GameComponent> */
-    public function getComponents(): array
-    {
-        return $this->components;
-    }
-
-    public function setComponent(GameComponent $component): self
-    {
-        $this->components[$component::class] = $component;
-        return $this;
-    }
-
-    /**
-     * @template T of GameComponent
-     * @param class-string<T> $componentClass
-     */
-    public function removeComponent(string $componentClass): void
-    {
-        unset($this->components[$componentClass::class]);
-    }
-
-    /**
-     * @template T of GameComponent
-     * @param class-string<T> $componentClass
-     */
-    public function hasComponent(string $componentClass): bool
-    {
-        return $this->getComponent($componentClass) !== null;
-    }
-
     public function clone(): GameObject
     {
         return new $this($this->getPrototype(), $this->cloneComponents());
@@ -137,10 +68,5 @@ class GameObject implements GameObjectInterface
         return array_map(function (GameComponent $component) {
             return clone $component;
         }, $this->components);
-    }
-
-    public  function __toString(): string
-    {
-        return $this::class . '::' . $this->getId();
     }
 }

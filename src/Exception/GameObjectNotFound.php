@@ -1,6 +1,6 @@
 <?php
 
-namespace PennyPHP\Core\GameObject\Exception;
+namespace PennyPHP\Core\Exception;
 
 use RuntimeException;
 

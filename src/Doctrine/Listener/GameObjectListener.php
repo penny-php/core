@@ -1,13 +1,13 @@
 <?php
 
-namespace PennyPHP\Core\GameObject\Doctrine\Listener;
+namespace PennyPHP\Core\Doctrine\Listener;
 
 use Doctrine\Bundle\DoctrineBundle\Attribute\AsEntityListener;
 use Doctrine\ORM\Events;
 use PennyPHP\Core\Entity\GameObject;
-use PennyPHP\Core\GameObject\Event\GameObjectNewEvent;
-use PennyPHP\Core\GameObject\Event\GameObjectRemoveEvent;
-use PennyPHP\Core\GameObject\Event\GameObjectUpdateEvent;
+use PennyPHP\Core\Event\GameObjectNewEvent;
+use PennyPHP\Core\Event\GameObjectRemoveEvent;
+use PennyPHP\Core\Event\GameObjectUpdateEvent;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 #[AsEntityListener(event: Events::postPersist, entity: GameObject::class)]

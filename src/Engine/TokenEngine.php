@@ -1,10 +1,10 @@
 <?php
 
-namespace PennyPHP\Core\Token;
+namespace PennyPHP\Core\Engine;
 
 use App\Repository\Data\PlayerCharacterRepository;
-use PennyPHP\Core\GameObject\GameObjectInterface;
-use PennyPHP\Core\GameObject\Repository\GameObjectRepository;
+use PennyPHP\Core\GameObjectInterface;
+use PennyPHP\Core\Repository\GameObjectRepository;
 
 readonly class TokenEngine
 {

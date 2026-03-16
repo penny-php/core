@@ -1,6 +1,6 @@
 <?php
 
-namespace PennyPHP\Core\GameObject;
+namespace PennyPHP\Core;
 
 abstract class AbstractGameObject implements GameObjectInterface
 {

@@ -1,21 +1,20 @@
 <?php
 
-namespace PennyPHP\Core\GameObjectPrototype;
+namespace PennyPHP\Core;
 
 use PennyPHP\Core\Entity\GameComponent;
 use PennyPHP\Core\Entity\GameObject;
-use PennyPHP\Core\GameComponent\Exception\InvalidGameComponentException;
+use PennyPHP\Core\Exception\InvalidGameComponentException;
 use ReflectionClass;
 use Symfony\Contracts\Cache\CacheInterface;
 
-abstract class AbstractGameObjectPrototype extends GameObject implements GameObjectPrototypeInterface
+abstract class AbstractGameObjectPrototype implements GameObjectPrototypeInterface
 {
 
     public function __construct(
         private readonly CacheInterface $gameObjectCache
     )
     {
-        parent::__construct(self::getType(), $this->getGameComponentFromAttributes());
     }
 
     /**
@@ -23,7 +22,7 @@ abstract class AbstractGameObjectPrototype extends GameObject implements GameObj
      */
     public function make(): GameObject
     {
-        return new GameObject(self::getType(), $this->getComponents());
+        return new GameObject($this->getType(), $this->getGameComponentFromAttributes());
     }
 
     private function getGameComponentFromAttributes(): array
@@ -48,5 +47,30 @@ abstract class AbstractGameObjectPrototype extends GameObject implements GameObj
     {
         $explodedClass = explode("\\", static::class);
         return array_pop($explodedClass);
+    }
+
+    public function getComponents(): array
+    {
+        return $this->getGameComponentFromAttributes();
+    }
+
+    /**
+     * @template T of GameComponent
+     * @param class-string<T> $componentClass
+     * @return GameComponent|null
+     */
+    public function getComponent(string $componentClass): ?GameComponent
+    {
+        if ($component = $this->getComponents()[$componentClass::getComponentName()] ?? null) {
+            return $component;
+        }
+
+        foreach ($this->getComponents() as $component) {
+            if ($component::getComponentName() === $componentClass::getComponentName()) {
+                return $component;
+            }
+        }
+
+        return null;
     }
 }

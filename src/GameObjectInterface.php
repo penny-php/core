@@ -1,6 +1,6 @@
 <?php
 
-namespace PennyPHP\Core\GameObject;
+namespace PennyPHP\Core;
 
 use PennyPHP\Core\Entity\GameComponent;
 use Stringable;
@@ -25,7 +25,7 @@ interface GameObjectInterface extends Stringable
     /**
      * @template T of GameComponent
      * @param class-string<T> $componentClass
-     * @return GameComponent|null
+     * @return T|null
      */
     public function getComponent(string $componentClass): ?GameComponent;
 

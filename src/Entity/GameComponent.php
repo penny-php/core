@@ -4,9 +4,11 @@ namespace PennyPHP\Core\Entity;
 
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\MappedSuperclass;
 use Doctrine\ORM\Mapping\OneToOne;
-use PennyPHP\Core\GameComponent\GameComponentInterface;
+use PennyPHP\Core\GameComponentInterface;
+use PennyPHP\Core\GameObjectInterface;
 use Symfony\Component\Uid\Uuid;
 
 #[MappedSuperclass]
@@ -18,7 +20,8 @@ abstract class GameComponent implements GameComponentInterface
 
     public function __construct(
         #[OneToOne(targetEntity: GameObject::class)]
-        protected ?GameObject $gameObject = null
+        #[JoinColumn(onDelete: "CASCADE")]
+        protected ?GameObjectInterface $gameObject = null
     )
     {
         $this->id = Uuid::v7();
@@ -29,12 +32,12 @@ abstract class GameComponent implements GameComponentInterface
         return $this->id;
     }
 
-    public function getGameObject(): ?GameObject
+    public function getGameObject(): ?GameObjectInterface
     {
         return $this->gameObject;
     }
 
-    public function setGameObject(GameObject $gameObject): void
+    public function setGameObject(GameObjectInterface $gameObject): void
     {
         $this->gameObject = $gameObject;
     }

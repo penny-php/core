@@ -6,8 +6,6 @@ services:
   PennyPHP\Core\:
     resource: '../src/'
     exclude:
-      - '../src/GameObject/Entity'
-      - '../src/GameObject/Event'
-      - '../src/GameObject/Exception'
-      - '../src/GameComponent/Entity'
-      - '../src/GameComponent/Exception'
+      - '../src/Entity'
+      - '../src/Event'
+      - '../src/Exception'

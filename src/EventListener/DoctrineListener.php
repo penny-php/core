@@ -1,6 +1,6 @@
 <?php
 
-namespace PennyPHP\Core\GameComponent\EventListener;
+namespace PennyPHP\Core\EventListener;
 
 use Doctrine\Bundle\DoctrineBundle\Attribute\AsEntityListener;
 use Doctrine\ORM\EntityManagerInterface;
