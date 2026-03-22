@@ -7,11 +7,9 @@ use Doctrine\ORM\Events;
 use PennyPHP\Core\Entity\GameObject;
 use PennyPHP\Core\Event\GameObjectNewEvent;
 use PennyPHP\Core\Event\GameObjectRemoveEvent;
-use PennyPHP\Core\Event\GameObjectUpdateEvent;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 #[AsEntityListener(event: Events::postPersist, entity: GameObject::class)]
-#[AsEntityListener(event: Events::postUpdate, entity: GameObject::class)]
 #[AsEntityListener(event: Events::postRemove, entity: GameObject::class)]
 readonly class GameObjectListener
 {
@@ -28,7 +26,7 @@ readonly class GameObjectListener
 
     public function postUpdate(GameObject $gameObject): void
     {
-        $this->eventDispatcher->dispatch(new GameObjectUpdateEvent($gameObject));
+        // update in where components changes,so is not triggered here
     }
 
     public function postRemove(GameObject $gameObject): void
